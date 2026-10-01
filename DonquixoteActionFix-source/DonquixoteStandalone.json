@@ -1,0 +1,12 @@
+{
+  "id": "DonquixoteStandalone",
+  "name": "Don Quixote - Lesser Kindred Fix (Standalone)",
+  "author": "Compatibility fork; original character by 帽子",
+  "description": "Standalone package based on Donquixote 0.1.6.beta. Fixes the Defend action waiting on its Cast animation when opening the Draw Pile.",
+  "version": "0.1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [],
+  "min_game_version": "0.107.1",
+  "affects_gameplay": true
+}

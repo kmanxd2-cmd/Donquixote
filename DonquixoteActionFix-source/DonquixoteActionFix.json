@@ -1,0 +1,17 @@
+{
+  "id": "DonquixoteActionFix",
+  "name": "Don Quixote Action Fix",
+  "author": "Local compatibility patch",
+  "description": "Prevents Donquixote Defend from suspending its card action on the Cast animation.",
+  "version": "0.1.0",
+  "has_pck": false,
+  "has_dll": true,
+  "dependencies": [
+    {
+      "id": "Donquixote",
+      "min_version": "0.1.6.beta"
+    }
+  ],
+  "min_game_version": "0.107.1",
+  "affects_gameplay": true
+}

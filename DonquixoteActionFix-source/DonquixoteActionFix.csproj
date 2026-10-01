@@ -1,0 +1,40 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>DonquixoteStandalone</AssemblyName>
+    <GodotDisabledSourceGenerators>GodotPluginsInitializer</GodotDisabledSourceGenerators>
+    <Sts2Dir Condition="'$(Sts2Dir)' == ''">E:\SteamLibrary\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+    <DonquixoteModDir Condition="'$(DonquixoteModDir)' == ''">C:\Users\HP\Downloads\3764112372____beta___Don_Quixote-______________Limbus_Company_______________________________________\3764112372 【beta】Don Quixote-堂吉诃德 [Limbus Company] _【边狱巴士】【边狱公司】</DonquixoteModDir>
+    <ModStageDir>$(MSBuildProjectDirectory)\dist\$(MSBuildProjectName)</ModStageDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataDir)\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <EmbeddedResource Include="$(DonquixoteModDir)\Donquixote.dll"
+                      LogicalName="DonquixoteActionFix.OriginalDonquixote.dll" />
+  </ItemGroup>
+
+  <Target Name="CheckSts2References" BeforeTargets="Build">
+    <Error Text="Slay the Spire 2 assemblies not found in '$(Sts2DataDir)'. Set Sts2Dir to your game folder."
+           Condition="!Exists('$(Sts2DataDir)\sts2.dll') or !Exists('$(Sts2DataDir)\0Harmony.dll')" />
+    <Error Text="Original Donquixote.dll not found in '$(DonquixoteModDir)'. Set DonquixoteModDir to the supplied mod folder."
+           Condition="!Exists('$(DonquixoteModDir)\Donquixote.dll')" />
+  </Target>
+
+  <Target Name="StageModFiles" AfterTargets="Build">
+    <MakeDir Directories="$(ModStageDir)" />
+    <Copy SourceFiles="$(TargetPath);$(MSBuildProjectDirectory)\DonquixoteStandalone.json;$(DonquixoteModDir)\Donquixote.pck"
+          DestinationFolder="$(ModStageDir)" />
+  </Target>
+</Project>
